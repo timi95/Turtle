@@ -1,22 +1,21 @@
 // tsc Turtle.ts --watch
 
 // The requestAnimationFrame method is extremely useful. It functions a lot like setTimeout
-// in that it will call your callback at approximate 60 calls per second (read: 60fps). What makes it 
+// in that it will call your callback at approximate 60 calls per second (read: 60fps). What makes it
 class Turtle{
-    
-    constructor( private x:number, private y:number, private angle:number,private ctx:any) 
-    {
-        // ctx = ctx.getContext("2d");
-        // ctx.fillStyle = "red"
-        // ctx.arc(x,y,25,2 * Math.PI,false)
-        // ctx.fill()
-        console.log("A new Turtle was created!")
-    }
+
+    constructor( private x:number,
+				 private y:number,
+				 private angle:number,
+				 private ctx:any,
+				 private fillColor:any)
+				{ console.log("A new Turtle was created!"); }
 
     draw(){
-        // this.ctx = this.ctx.getContext("2d");
-        this.ctx.fillStyle = "red"
-        this.ctx.arc(x,y,25,2 * Math.PI,false)
+        // let rand255 = Math.floor((Math.random() * 255) + 1);
+        let rand55 = Math.floor((Math.random() * 55) + 1);
+        this.ctx.fillStyle = "rgba("+this.x+","+this.y+","+this.x+",1)";
+        this.ctx.arc(this.x,this.y,25,2 * Math.PI,false)
         this.ctx.fill()
         console.log(" Turtle was Drawn!")
     }
@@ -24,10 +23,12 @@ class Turtle{
     // rotate orientation delta degrees counterclockwise
     turnLeft( delta:number) {
         this.angle += delta;
+		console.log("turning left!")
     }
     // rotate orientation delta degrees clockwise
     turnRight( delta:number) {
         this.angle -= delta;
+		console.log("turning right!")
     }
 
     line(oldx:number, oldy:number, x:number, y:number){
@@ -35,7 +36,7 @@ class Turtle{
         this.ctx.fillStyle = 'blue';
         this.ctx.moveTo(oldx, oldy);    // Move the pen to (oldx:number, oldy:number)
         this.ctx.lineTo(x, y);  // Draw a line to (x:number, y:number)
-        this.ctx.stroke();  
+        this.ctx.stroke();
         this.ctx.closePath();
     }
     // move forward the given amount, with the pen down
@@ -51,18 +52,16 @@ class Turtle{
 }
 
 // // setting up a canvas and grabbing its 2D context
-var canvas = document.createElement('canvas');
-var width = 400;
-var height = 400;
-canvas.width = width;
-canvas.height = height;
+let canvas = <HTMLCanvasElement> document.getElementById('Plane');
 var context = canvas.getContext('2d');
+let color: any = 'blue';
 
 
 let x:number = 100; let y:number = 100; let angle:number = 90;
-let turt = new Turtle( x,  y, angle, context);
+let countUp:boolean = true; let countDown:boolean = false; let count:number = 0;
+let turt = new Turtle( x,  y, angle, context, color);
 
-// better than just using setTimeout is that your browser can perform optimizations on the 
+// better than just using setTimeout is that your browser can perform optimizations on the
 // call. For instance, if the tab isn’t active it will stop making calls until it becomes active again.
 var animate = window.requestAnimationFrame ||
               window.webkitRequestAnimationFrame ||
@@ -79,7 +78,22 @@ var step = function() {
   };
 
 var update = function() { // Define the next movements of the Turtle(s)
-    turt.goForward(5);
+
+	turt.goForward(5);
+	// incomplete bouncing logic
+	if(countUp){
+		turt.turnLeft(3);
+		count++;
+		console.log("count: ",count);
+	  } else {
+		turt.turnRight(2);
+		count--
+		console.log("count: ",count);
+		}
+
+	if( count >= 200 ) { countUp = false; }
+	else if( count <= 0 ) { countUp = true; }
+
  };
 var render = function() { // Render the updated Turtle(s)
     turt.draw();
@@ -87,6 +101,6 @@ var render = function() { // Render the updated Turtle(s)
 
 
  window.onload = function() {
-    document.body.appendChild(canvas);
+    //document.body.appendChild(canvas);
     animate(step);
   };

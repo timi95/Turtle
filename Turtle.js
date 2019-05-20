@@ -1,32 +1,32 @@
 // tsc Turtle.ts --watch
 // The requestAnimationFrame method is extremely useful. It functions a lot like setTimeout
-// in that it will call your callback at approximate 60 calls per second (read: 60fps). What makes it 
+// in that it will call your callback at approximate 60 calls per second (read: 60fps). What makes it
 var Turtle = /** @class */ (function () {
-    function Turtle(x, y, angle, ctx) {
+    function Turtle(x, y, angle, ctx, fillColor) {
         this.x = x;
         this.y = y;
         this.angle = angle;
         this.ctx = ctx;
-        // ctx = ctx.getContext("2d");
-        // ctx.fillStyle = "red"
-        // ctx.arc(x,y,25,2 * Math.PI,false)
-        // ctx.fill()
+        this.fillColor = fillColor;
         console.log("A new Turtle was created!");
     }
     Turtle.prototype.draw = function () {
-        // this.ctx = this.ctx.getContext("2d");
-        this.ctx.fillStyle = "red";
-        this.ctx.arc(x, y, 25, 2 * Math.PI, false);
+        // let rand255 = Math.floor((Math.random() * 255) + 1);
+        var rand55 = Math.floor((Math.random() * 55) + 1);
+        this.ctx.fillStyle = "rgba(" + this.x + "," + this.y + "," + this.x + ",1)";
+        this.ctx.arc(this.x, this.y, 25, 2 * Math.PI, false);
         this.ctx.fill();
         console.log(" Turtle was Drawn!");
     };
     // rotate orientation delta degrees counterclockwise
     Turtle.prototype.turnLeft = function (delta) {
         this.angle += delta;
+        console.log("turning left!");
     };
     // rotate orientation delta degrees clockwise
     Turtle.prototype.turnRight = function (delta) {
         this.angle -= delta;
+        console.log("turning right!");
     };
     Turtle.prototype.line = function (oldx, oldy, x, y) {
         this.ctx.beginPath(); // Start a new path
@@ -48,17 +48,17 @@ var Turtle = /** @class */ (function () {
     return Turtle;
 }());
 // // setting up a canvas and grabbing its 2D context
-var canvas = document.createElement('canvas');
-var width = 400;
-var height = 400;
-canvas.width = width;
-canvas.height = height;
+var canvas = document.getElementById('Plane');
 var context = canvas.getContext('2d');
+var color = 'blue';
 var x = 100;
 var y = 100;
 var angle = 90;
-var turt = new Turtle(x, y, angle, context);
-// better than just using setTimeout is that your browser can perform optimizations on the 
+var countUp = true;
+var countDown = false;
+var count = 0;
+var turt = new Turtle(x, y, angle, context, color);
+// better than just using setTimeout is that your browser can perform optimizations on the
 // call. For instance, if the tab isn’t active it will stop making calls until it becomes active again.
 var animate = window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
@@ -74,11 +74,28 @@ var step = function () {
 };
 var update = function () {
     turt.goForward(5);
+    // incomplete bouncing logic
+    if (countUp) {
+        turt.turnLeft(3);
+        count++;
+        console.log("count: ", count);
+    }
+    else {
+        turt.turnRight(2);
+        count--;
+        console.log("count: ", count);
+    }
+    if (count >= 200) {
+        countUp = false;
+    }
+    else if (count <= 0) {
+        countUp = true;
+    }
 };
 var render = function () {
     turt.draw();
 };
 window.onload = function () {
-    document.body.appendChild(canvas);
+    //document.body.appendChild(canvas);
     animate(step);
 };
