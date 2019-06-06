@@ -3,6 +3,8 @@
 // The requestAnimationFrame method is extremely useful. It functions a lot like setTimeout
 // in that it will call your callback at approximate 60 calls per second (read: 60fps). What makes it
 class Turtle{
+    const offset_x:number = 350;
+    const offset_y:number = 200;
 
     constructor( private x:number,
 				 private y:number,
@@ -15,10 +17,12 @@ class Turtle{
         // let rand255 = Math.floor((Math.random() * 255) + 1);
         let rand55 = Math.floor((Math.random() * 55) + 1);
         this.ctx.fillStyle = "rgba("+this.x+","+this.y+","+this.x+",1)";
-        this.ctx.arc(this.x+400,this.y+250,25,2 * Math.PI,false)
+        this.ctx.arc(this.x+this.offset_x,this.y+this.offset_y,25,2 * Math.PI,false)
         this.ctx.fill()
+        this.ctx.closePath();
         console.log(" Turtle was Drawn!")
     }
+
 
     // rotate orientation delta degrees counterclockwise
     turnLeft( delta:number) {
@@ -46,7 +50,7 @@ class Turtle{
         // Angle in radians = Angle in degrees x PI / 180.
         this.x += step * Math.cos(this.angle * Math.PI/180);
         this.y += step * Math.sin(this.angle * Math.PI/180);
-        this.line(oldx, oldy, this.x, this.y);
+        // this.line(oldx, oldy, this.x, this.y);
     }
 
 }
@@ -79,23 +83,26 @@ var step = function() {
 
 var update = function() { // Define the next movements of the Turtle(s)
 
-	turt.goForward(-5);
-  // turt.turnLeft(Math.floor(Math.random() * 100) + 1  );
-  // turt.turnRight(Math.floor(Math.random() * 100) + 1  );
-
-
-  if(countUp){
-
+	turt.goForward(0.8);
+	// incomplete bouncing logic
+	if(countUp){
+		// turt.turnLeft(3);
 		count++;
 		console.log("count: ",count);
 	  } else {
+		// turt.turnRight(2);
 		count--
 		console.log("count: ",count);
-		}
+  	}
 
-
-	if( count >= 5 ) { countUp = false; turt.turnLeft(Math.floor(Math.random() * 100) + 10  )); }
-	else if( count <= 0 ) { countUp = true; turt.turnRight(Math.floor(Math.random() * 100) + 10  ));}
+  let TERMINAL_VALUE:number = 20;
+	if( count >= TERMINAL_VALUE ) {
+    countUp = false;
+    turt.turnLeft(Math.floor(Math.random() * 100) + 50  );
+    } else if( count <= 0 ) {
+       countUp = true;
+       turt.turnRight(Math.floor(Math.random() * 100) + 50  );
+     }
 
  };
 var render = function() { // Render the updated Turtle(s)

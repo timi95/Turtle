@@ -8,14 +8,17 @@ var Turtle = /** @class */ (function () {
         this.angle = angle;
         this.ctx = ctx;
         this.fillColor = fillColor;
+        this.offset_x = 350;
+        this.offset_y = 200;
         console.log("A new Turtle was created!");
     }
     Turtle.prototype.draw = function () {
         // let rand255 = Math.floor((Math.random() * 255) + 1);
         var rand55 = Math.floor((Math.random() * 55) + 1);
         this.ctx.fillStyle = "rgba(" + this.x + "," + this.y + "," + this.x + ",1)";
-        this.ctx.arc(this.x + 400, this.y + 250, 25, 2 * Math.PI, false);
+        this.ctx.arc(this.x + this.offset_x, this.y + this.offset_y, 25, 2 * Math.PI, false);
         this.ctx.fill();
+        this.ctx.closePath();
         console.log(" Turtle was Drawn!");
     };
     // rotate orientation delta degrees counterclockwise
@@ -43,7 +46,7 @@ var Turtle = /** @class */ (function () {
         // Angle in radians = Angle in degrees x PI / 180.
         this.x += step * Math.cos(this.angle * Math.PI / 180);
         this.y += step * Math.sin(this.angle * Math.PI / 180);
-        this.line(oldx, oldy, this.x, this.y);
+        // this.line(oldx, oldy, this.x, this.y);
     };
     return Turtle;
 }());
@@ -73,26 +76,26 @@ var step = function () {
     animate(step);
 };
 var update = function () {
-    turt.goForward(-5);
-    // turt.turnLeft(Math.floor(Math.random() * 100) + 1  );
-    // turt.turnRight(Math.floor(Math.random() * 100) + 1  );
+    turt.goForward(0.8);
+    // incomplete bouncing logic
     if (countUp) {
+        // turt.turnLeft(3);
         count++;
         console.log("count: ", count);
     }
     else {
+        // turt.turnRight(2);
         count--;
         console.log("count: ", count);
     }
-    if (count >= 5) {
+    var TERMINAL_VALUE = 20;
+    if (count >= TERMINAL_VALUE) {
         countUp = false;
-        turt.turnLeft(Math.floor(Math.random() * 100) + 10);
-        ;
+        turt.turnLeft(Math.floor(Math.random() * 100) + 50);
     }
     else if (count <= 0) {
         countUp = true;
-        turt.turnRight(Math.floor(Math.random() * 100) + 10);
-        ;
+        turt.turnRight(Math.floor(Math.random() * 100) + 50);
     }
 };
 var render = function () {
