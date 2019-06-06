@@ -14,7 +14,7 @@ var Turtle = /** @class */ (function () {
         // let rand255 = Math.floor((Math.random() * 255) + 1);
         var rand55 = Math.floor((Math.random() * 55) + 1);
         this.ctx.fillStyle = "rgba(" + this.x + "," + this.y + "," + this.x + ",1)";
-        this.ctx.arc(this.x, this.y, 25, 2 * Math.PI, false);
+        this.ctx.arc(this.x + 400, this.y + 250, 25, 2 * Math.PI, false);
         this.ctx.fill();
         console.log(" Turtle was Drawn!");
     };
@@ -73,23 +73,26 @@ var step = function () {
     animate(step);
 };
 var update = function () {
-    turt.goForward(5);
-    // incomplete bouncing logic
+    turt.goForward(-5);
+    // turt.turnLeft(Math.floor(Math.random() * 100) + 1  );
+    // turt.turnRight(Math.floor(Math.random() * 100) + 1  );
     if (countUp) {
-        turt.turnLeft(3);
         count++;
         console.log("count: ", count);
     }
     else {
-        turt.turnRight(2);
         count--;
         console.log("count: ", count);
     }
-    if (count >= 200) {
+    if (count >= 5) {
         countUp = false;
+        turt.turnLeft(Math.floor(Math.random() * 100) + 10);
+        ;
     }
     else if (count <= 0) {
         countUp = true;
+        turt.turnRight(Math.floor(Math.random() * 100) + 10);
+        ;
     }
 };
 var render = function () {
