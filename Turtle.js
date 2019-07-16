@@ -76,7 +76,7 @@ var step = function () {
     animate(step);
 };
 var update = function () {
-    turt.goForward(0.8);
+    turt.goForward(-1);
     // incomplete bouncing logic
     if (countUp) {
         // turt.turnLeft(3);
@@ -88,6 +88,7 @@ var update = function () {
         count--;
         console.log("count: ", count);
     }
+    //
     var TERMINAL_VALUE = 20;
     if (count >= TERMINAL_VALUE) {
         countUp = false;
