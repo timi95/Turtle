@@ -18,6 +18,9 @@ class Turtle {
   private ycoordinate:number;
   private colour:RGBA_colour;
 
+  private centreCoordinate:number[];
+  private bodyArea:number;
+
  constructor( private x:number,
               private y:number,
               private angle:number,
