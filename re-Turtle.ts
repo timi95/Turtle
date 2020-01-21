@@ -1,11 +1,4 @@
-// class Turtle{
 
-//   // when a turtle is created;
-//   // x and y coordinates are initialised
-//   // the angle/direction in which the turtle is pointing is setTimeout
-//   // the color of the turtle is set
-//   constructor(){}
-// }
 interface RGBA_colour {
   red:number;
   green:number;
@@ -13,7 +6,7 @@ interface RGBA_colour {
   alpha:number;
 }
 
-class Turtle {
+class Turtle_V2 {
   private xcoordinate:number;
   private ycoordinate:number;
   private colour:RGBA_colour;
@@ -27,23 +20,46 @@ class Turtle {
               private ctx:any,
               private fillColor:any) { 
   console.log("A new Turtle was created!"); 
+
+  }
+
+  // Low level functions
+  draw(){
+  }
+  // rotate orientation delta degrees counterclockwise
+  turnLeft( delta:number) {
+  }
+  // rotate orientation delta degrees clockwise
+  turnRight( delta:number) {
+  }
+
+  line(oldx:number, oldy:number, x:number, y:number){
+  }
+  // move forward the given amount, with the pen down
+  goForward(step:number) {
+  }
+
+
+  // Turtle behaviours
+
+  // A random walk for this turtle
+  wander(){
+    console.log('This turtle is wandering');
+    
+  }
+
+
 }
 
- draw(){
- }
 
- // rotate orientation delta degrees counterclockwise
- turnLeft( delta:number) {
- }
- // rotate orientation delta degrees clockwise
- turnRight( delta:number) {
- }
 
- line(oldx:number, oldy:number, x:number, y:number){
- }
- // move forward the given amount, with the pen down
- goForward(step:number) {
 
- }
+var animate = window.requestAnimationFrame ||
+              window.webkitRequestAnimationFrame ||
+//            window.mozRequestAnimationFrame ||//Turtle.ts:9:10 - error TS2339: Property 'mozRequestAnimationFrame' does not exist on type 'Window'.
+              function(callback) { window.setTimeout(callback, 1000/60) };
 
-}
+window.onload = function() {
+  //document.body.appendChild(canvas);
+  animate(step);
+};
