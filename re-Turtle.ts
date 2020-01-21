@@ -7,24 +7,32 @@ interface RGBA_colour {
 }
 
 class Turtle_V2 {
+  private myName:string;
   private xcoordinate:number;
   private ycoordinate:number;
+  private angle:number;
+  private ctx:any;
+  private fillColor:any;
+
   private colour:RGBA_colour;
 
   private centreCoordinate:number[];
   private bodyArea:number;
 
- constructor( private x:number,
-              private y:number,
-              private angle:number,
-              private ctx:any,
-              private fillColor:any) { 
+ constructor() { 
   console.log("A new Turtle was created!"); 
-
+    this.myName = this.generateName();
   }
 
-  // Low level functions
+  // ********  Low level functions  ***************
+  generateName(): string {
+    return '';
+  }
+
   draw(){
+  }
+
+  checkPosition(){
   }
   // rotate orientation delta degrees counterclockwise
   turnLeft( delta:number) {
@@ -40,13 +48,18 @@ class Turtle_V2 {
   }
 
 
-  // Turtle behaviours
+  // ************** Turtle behaviours ******************
 
   // A random walk for this turtle
   wander(){
-    console.log('This turtle is wandering');
+    console.log(`${this.myName} the turtle is wandering`);
     
   }
+  follow( myPosition:number[], followingPosition:number[] ){
+    console.log(`${this.myName} the turtle is following: ${followingPosition}`);
+    
+  }
+
 
 
 }
