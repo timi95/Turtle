@@ -30,6 +30,8 @@ class Turtle_V2 {
   }
 
   draw(){
+    console.log(`Turtle ${this.myName} has been drawn !`);
+    
   }
 
   checkPosition(){
