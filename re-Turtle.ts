@@ -28,7 +28,7 @@ class Turtle_V2 {
   generateName(): string {
     return '';
   }
-
+//
   draw(){
     console.log(`Turtle ${this.myName} has been drawn !`);
     
