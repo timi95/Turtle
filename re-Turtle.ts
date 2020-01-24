@@ -1,4 +1,7 @@
 
+import { Nouns } from "./nouns";
+import { Adjectives } from "./adjectives";
+
 interface RGBA_colour {
   red:number;
   green:number;
@@ -26,9 +29,14 @@ class Turtle_V2 {
 
   // ********  Low level functions  ***************
   generateName(): string {
-    return '';
+    let nameArray:string[] = Nouns.nouns;
+    let adjectiveArray:string[] = Adjectives.adjectives;
+    let randomSeed:number = Math.random()*adjectiveArray.length;
+    let randomSeed2:number = Math.random()*nameArray.length;
+
+    return `The ${adjectiveArray[randomSeed]} ${nameArray[randomSeed2]}`;
   }
-//
+
   draw(){
     console.log(`Turtle ${this.myName} has been drawn !`);
     
