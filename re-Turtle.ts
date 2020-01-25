@@ -58,7 +58,7 @@ class Turtle_V2 {
   }
 
 
-  // ************** Turtle behaviours ******************
+  // ************** Turtle behaviours *******************
 
   // A random walk for this turtle
   wander(){
