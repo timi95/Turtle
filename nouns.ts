@@ -993,9 +993,9 @@ export class Nouns {
     "words",
     "workman",
     "youngster" ]
-  static nouns: string[];
 
-    constructor(parameters) {
+
+    constructor() {
         
     }
 

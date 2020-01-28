@@ -9,6 +9,7 @@ interface RGBA_colour {
   alpha:number;
 }
 
+// Agent behaviour is  sense - plan - act cycle
 class Turtle_V2 {
   private myName:string;
   private xcoordinate:number;
@@ -70,10 +71,7 @@ class Turtle_V2 {
     
   }
 
-
-
 }
-
 
 
 
@@ -82,7 +80,37 @@ var animate = window.requestAnimationFrame ||
 //            window.mozRequestAnimationFrame ||//Turtle.ts:9:10 - error TS2339: Property 'mozRequestAnimationFrame' does not exist on type 'Window'.
               function(callback) { window.setTimeout(callback, 1000/60) };
 
+// setting up a canvas and grabbing its 2D context
+var canvas = document.createElement('canvas');
+var width = 400;
+var height = 400;
+canvas.width = width;
+canvas.height = height;
+var context = canvas.getContext('2d');
+
+
+// The step function will be responsible for doing three things.
+// First it will update all of our objects: the player’s paddle, the computer’s paddle, and the ball.
+// Next it will render those objects. And lastly, it will use requestAnimationFrame to call the step function again:
+var step = function() {
+  update();
+  render();
+  animate(step);
+};
+
+
+//   To get something on the screen let’s implement update as a no-op and for our render
+//    function we’ll set the background of our game to #FF00FF by using the fillStyle and fillRect 
+//    methods provided by the context:
+var update = function() {
+};
+
+var render = function() {
+  context.fillStyle = "#cdcdcd";
+  context.fillRect(0, 0, width, height);
+};
+
 window.onload = function() {
-  //document.body.appendChild(canvas);
+  document.body.appendChild(canvas);
   animate(step);
 };
