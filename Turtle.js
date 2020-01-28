@@ -48,6 +48,14 @@ var Turtle = /** @class */ (function () {
         this.y += step * Math.sin(this.angle * Math.PI / 180);
         // this.line(oldx, oldy, this.x, this.y);
     };
+    Turtle.prototype.goBackward = function (step) {
+        var oldx = this.x;
+        var oldy = this.y;
+        // Angle in radians = Angle in degrees x PI / 180.
+        this.x -= step * Math.cos(this.angle * Math.PI / 180);
+        this.y -= step * Math.sin(this.angle * Math.PI / 180);
+        // this.line(oldx, oldy, this.x, this.y);
+    };
     return Turtle;
 }());
 // // setting up a canvas and grabbing its 2D context
@@ -76,7 +84,14 @@ var step = function () {
     animate(step);
 };
 var update = function () {
-    turt.goForward(-1);
+    if (turt.x < 50 && turt.x > 0
+        || turt.y < 50 && turt.y > 0) {
+        turt.goForward(2);
+        console.log("Position: x=>", turt.x, " y=>", turt.y);
+    }
+    else {
+        turt.goBackward(2);
+    }
     // incomplete bouncing logic
     if (countUp) {
         // turt.turnLeft(3);
