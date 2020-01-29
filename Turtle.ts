@@ -65,7 +65,7 @@ class Turtle{
 
 }
 
-// // setting up a canvas and grabbing its 2D context
+// setting up a canvas and grabbing its 2D context
 let canvas = <HTMLCanvasElement> document.getElementById('Plane');
 var context = canvas.getContext('2d');
 let color: any = 'blue';
@@ -130,6 +130,6 @@ var render = function() { // Render the updated Turtle(s)
 
 
  window.onload = function() {
-    //document.body.appendChild(canvas);
+    document.body.appendChild(canvas);
     animate(step);
   };

@@ -58,7 +58,7 @@ var Turtle = /** @class */ (function () {
     };
     return Turtle;
 }());
-// // setting up a canvas and grabbing its 2D context
+// setting up a canvas and grabbing its 2D context
 var canvas = document.getElementById('Plane');
 var context = canvas.getContext('2d');
 var color = 'blue';
@@ -118,6 +118,6 @@ var render = function () {
     turt.draw();
 };
 window.onload = function () {
-    //document.body.appendChild(canvas);
+    document.body.appendChild(canvas);
     animate(step);
 };

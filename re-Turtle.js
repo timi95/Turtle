@@ -42,17 +42,20 @@ var Turtle_V2 = /** @class */ (function () {
     };
     return Turtle_V2;
 }());
-var animate = window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    //            window.mozRequestAnimationFrame ||//Turtle.ts:9:10 - error TS2339: Property 'mozRequestAnimationFrame' does not exist on type 'Window'.
-    function (callback) { window.setTimeout(callback, 1000 / 60); };
 // setting up a canvas and grabbing its 2D context
-var canvas = document.createElement('canvas');
+var canvas = document.getElementById('Plane');
+console.log('this is the canvas', canvas);
+canvas.setAttribute("style", "border: 2px solid black; background-color: silver;");
+canvas.setAttribute('width', '1000');
+var context = canvas.getContext('2d');
 var width = 400;
 var height = 400;
 canvas.width = width;
 canvas.height = height;
-var context = canvas.getContext('2d');
+var animate = window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    //            window.mozRequestAnimationFrame ||//Turtle.ts:9:10 - error TS2339: Property 'mozRequestAnimationFrame' does not exist on type 'Window'.
+    function (callback) { window.setTimeout(callback, 1000 / 60); };
 // The step function will be responsible for doing three things.
 // First it will update all of our objects: the player’s paddle, the computer’s paddle, and the ball.
 // Next it will render those objects. And lastly, it will use requestAnimationFrame to call the step function again:
