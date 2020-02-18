@@ -1,6 +1,6 @@
 
-import { Nouns } from "./nouns";
-import { Adjectives } from "./adjectives";
+// import { Nouns } from "./nouns";
+// import { Adjectives } from "./adjectives";
 
 interface RGBA_colour {
   red:number;
@@ -11,6 +11,8 @@ interface RGBA_colour {
 
 // Agent behaviour is  sense - plan - act cycle
 class Turtle_V2 {
+  offset_x:number = 350;
+  offset_y:number = 200;
   private myName:string;
   private xcoordinate:number;
   private ycoordinate:number;
@@ -23,24 +25,34 @@ class Turtle_V2 {
   private centreCoordinate:number[];
   private bodyArea:number;
 
- constructor() { 
+ constructor(
+  public x:number,
+  public y:number,
+  private angle:number,
+  private ctx:any,
+  private fillColor:any) { 
   console.log("A new Turtle was created!"); 
-    this.myName = this.generateName();
+    // this.myName = this.generateName();
   }
 
   // ********  Low level functions  ***************
-  generateName(): string {
-    let nameArray:string[] = Nouns.nouns;
-    let adjectiveArray:string[] = Adjectives.adjectives;
-    let randomSeed:number = Math.random()*adjectiveArray.length;
-    let randomSeed2:number = Math.random()*nameArray.length;
+  // generateName(): string {
+  //   let nameArray:string[] = Nouns.nouns;
+  //   let adjectiveArray:string[] = Adjectives.adjectives;
+  //   let randomSeed:number = Math.random()*adjectiveArray.length;
+  //   let randomSeed2:number = Math.random()*nameArray.length;
 
-    return `The ${adjectiveArray[randomSeed]} ${nameArray[randomSeed2]}`;
-  }
+  //   return `The ${adjectiveArray[randomSeed]} ${nameArray[randomSeed2]}`;
+  // }
 
   draw(){
-    console.log(`Turtle ${this.myName} has been drawn !`);
-    
+    // console.log(`Turtle ${this.myName} has been drawn !`);
+    let rand55 = Math.floor((Math.random() * 55) + 1);
+    this.ctx.fillStyle = "rgba("+this.x+","+this.y+","+this.x+",1)";
+    this.ctx.arc(this.x+this.offset_x,this.y+this.offset_y,25,2 * Math.PI,false);
+    this.ctx.fill();
+    this.ctx.closePath();
+    console.log(" Turtle was Drawn!");
   }
 
   checkPosition(){
@@ -81,7 +93,7 @@ console.log('this is the canvas',canvas);
 canvas.setAttribute("style", "border: 2px solid black; background-color: silver;");
 canvas.setAttribute('width', '1000');
 let context = canvas.getContext('2d');
-var width = 400;
+var width = window.innerWidth;
 var height = 400;
 canvas.width = width;
 canvas.height = height;
