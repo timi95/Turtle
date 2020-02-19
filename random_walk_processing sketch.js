@@ -36,7 +36,6 @@ function draw() {
 console.log(`width: ${width}, height:${height}`);
 console.log(`X: ${x}, Y:${y}`);
 
-background(25);
 background(220);
 
   if( gameOn ){
