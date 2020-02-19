@@ -3,7 +3,15 @@ let y;
 let gameOn;
 let max;
 let min;
+let max2;
+let min2;
+let intervalX;
+let intervalY;
 
+function minMaxSetup() {
+intervalX = Math.random() * (max2 - min2) + min2;
+intervalY = Math.random() * (max - min) + min;
+}
 
 
 function setup() {
@@ -11,14 +19,20 @@ createCanvas(700, 400);
 x = width /2 ;
 y = height /2;
 gameOn = true;
-max = 10;
-min = -10;
 
-max2 = 20;
-min2 = -20;
+max = 4;
+min = -4;
+
+max2 = 6;
+min2 = -6;
+
+intervalX = Math.random() * (max2 - min2) + min2;
+intervalY = Math.random() * (max - min) + min;
+setInterval(minMaxSetup, 1000);
 }
 
 function draw() {
+
 console.log(`width: ${width}, height:${height}`);
 console.log(`X: ${x}, Y:${y}`);
 
@@ -26,8 +40,8 @@ background(25);
 background(220);
 
   if( gameOn ){
-  x += Math.random() * (max2 - min2) + min2;
-  y += Math.random() * (max - min) + min;
+  x += intervalX;
+  y += intervalY;
   }
 
 
